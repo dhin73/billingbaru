@@ -70,9 +70,6 @@
 					<div class="form-group">
 						<label for="invoiceid" class="control-label">Invoice ID</label>
 						<div class="input-group mb-2">
-							<!--<div class="input-group-prepend">
-								<div class="input-group-text">#</div>
-							</div>-->
 							<input type="text" class="form-control" name="invoiceid" id="invoiceid" placeholder="Invoice ID" required>
 						</div>
 					</div>
@@ -102,15 +99,6 @@
 					</div>
 					<!-- Invoice Manual -->
 					<div id="job2" style="display: none;">
-						<!--<div class="form-group">
-							<label for="ticketid" class="control-label">Ticket ID</label>
-							<div class="input-group mb-2">
-								<div class="input-group-prepend">
-									<div class="input-group-text">#</div>
-								</div>
-								<input type="text" class="form-control" name="config[ticketid]" id="ticketid" placeholder="Ticket ID">
-							</div>
-						</div>-->
 						<div class="form-group">
 							<label for="paymentstatus" class="control-label">Status Pembayaran</label>
 							<div class="input-group mb-2">
@@ -121,36 +109,24 @@
 								</select>
 							</div>
 						</div>
-						<!--<div class="form-group">
-							<label for="domain" class="control-label">Nama Domain</label>
-							<input type="text" class="form-control" name="config[domain]" id="domain" placeholder="Domain Name">
-						</div>-->
 						<div class="form-group">
 							<label for="clientid" class="control-label">Client ID</label>
 							<input type="number" class="form-control" name="config[clientid]" id="clientid" placeholder="Client ID">
 						</div>
 						<div class="form-group">
 							<label for="npwp" class="control-label">NPWP</label>
-							<td>
-								<br>
-							</td>
-							<td>
-							  <input type="radio" id="config[npwp]" name="config[npwp]" checked>
-							  <label>Ada </label>
-							</td>
-
-							<td>
-							  <input type="radio" id="dewey" name="config[npwp]">
-							  <label>Tidak Ada </label>
-							</td>
-
-							<input type="text" class="form-control" name="config[npwp]" id="npwp" placeholder="NPWP">
+							<select class="form-control" name="npwp" id="npwp" onchange="showNpwp(this.value);" required>
+								<option value="">Pilih...</option>
+								<option value="Ada">Ada</option>
+								<option value="Tidak Ada">Tidak Ada</option> 
+							</select>
 						</div>
-						<!--<div class="form-group">
-							<label for="emaillist" class="control-label">Milis</label>
-							<input type="text" class="form-control" name="config[emaillist]" id="emaillist" placeholder="Client ID">
-						</div>-->
-						
+						<div id="milis" style="display: none;">
+							<div class="form-group">
+								<label for="emaillist" class="control-label">Milis</label>
+								<input type="text" class="form-control" name="milis" id="milis" placeholder="milis">
+							</div>
+						</div>
 					</div>
 					<!-- Revisi Invoice -->
 					<div id="job3" style="display: none;">
@@ -311,6 +287,7 @@ endif;
 				$('#job1').hide();
 				$('#job2').show();
 				$('#job3').hide();
+				
 			} else if (jobid==3) {
 				$('#job1').hide();
 				$('#job2').hide();
@@ -323,5 +300,12 @@ endif;
 			$('#job3').hide();
 		}
 	}
+function showNPWP(npwp) {
+	if (npwp == "Ada") {
+		$('#milis').show();
+	} else if (npwp == "Tidak Ada") {
+		$('#milis').hide();
+	} 
+}
 </script>
 <?php $this->load->view("footer_view"); ?>
